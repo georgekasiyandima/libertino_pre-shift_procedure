@@ -1,4 +1,4 @@
-import { TableTurnOptimization } from '@/types'
+import type { TableTurnOptimization } from '@/types'
 
 interface TableTurnOptimizationProps {
   optimization: TableTurnOptimization

@@ -99,6 +99,59 @@ export interface TableTurnOptimization {
   bottlenecks: string[]
 }
 
+export interface SOSMessage {
+  id: string
+  type: 'location' | 'request' | 'alert' | 'bottleneck'
+  title: string
+  message: string
+  location?: string
+  priority: 'low' | 'medium' | 'high' | 'urgent'
+  createdBy: string
+  createdAt: string
+  resolved: boolean
+  resolvedAt?: string
+}
+
+export interface FloorMessage {
+  id: string
+  type: 'update' | 'warning' | 'info' | 'bottleneck'
+  message: string
+  section?: 'MDA' | 'Outside' | 'Library' | 'All'
+  priority: 'low' | 'medium' | 'high'
+  createdAt: string
+  expiresAt?: string
+}
+
+export interface ItemLocation {
+  id: string
+  item: string
+  location: string
+  section?: 'MDA' | 'Outside' | 'Library' | 'Kitchen' | 'Storage'
+  quantity?: string
+  notes?: string
+}
+
+export interface SeatingArrangement {
+  tableNumber: number
+  section: 'MDA' | 'Outside' | 'Library'
+  reservation?: Reservation
+  partySize: number
+  status: 'available' | 'reserved' | 'occupied'
+  x?: number
+  y?: number
+}
+
+export interface Menu {
+  id: string
+  name: string
+  type: 'brunch' | 'dinner' | 'lunch' | 'special'
+  imageUrl: string
+  pdfUrl?: string
+  uploadedAt: string
+  uploadedBy: string
+  isActive: boolean
+}
+
 export interface BriefingData {
   date: string
   saladOfTheDay: SaladOfTheDay | null
@@ -113,5 +166,10 @@ export interface BriefingData {
   serviceTimingGuidelines?: ServiceTimingGuideline[]
   preRushChecklist?: PreRushChecklist[]
   tableTurnOptimization?: TableTurnOptimization
+  sosMessages?: SOSMessage[]
+  floorMessages?: FloorMessage[]
+  itemLocations?: ItemLocation[]
+  seatingArrangement?: SeatingArrangement[]
+  currentMenu?: Menu
 }
 

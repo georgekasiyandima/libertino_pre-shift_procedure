@@ -1,23 +1,23 @@
-import { WaiterAllocation } from '@/types'
+import type { WaiterAllocation } from '@/types'
 
 interface WaiterAllocationProps {
   allocation: WaiterAllocation
 }
 
-const sectionLabels = {
-  MDA: 'Main Dining Area (Tables 1-12)',
-  Outside: 'Outside Section (Tables 21-25)',
-  Library: 'Library Area (Tables 61-66)',
+const sectionLabels: Record<keyof WaiterAllocation, string> = {
+  mda: 'Main Dining Area (Tables 1-12)',
+  outside: 'Outside Section (Tables 21-25)',
+  library: 'Library Area (Tables 61-66)',
 }
 
-const sectionColors = {
-  MDA: 'bg-blue-50 border-blue-500 text-blue-900',
-  Outside: 'bg-green-50 border-green-500 text-green-900',
-  Library: 'bg-purple-50 border-purple-500 text-purple-900',
+const sectionColors: Record<keyof WaiterAllocation, string> = {
+  mda: 'bg-blue-50 border-blue-500 text-blue-900',
+  outside: 'bg-green-50 border-green-500 text-green-900',
+  library: 'bg-purple-50 border-purple-500 text-purple-900',
 }
 
 export default function WaiterAllocation({ allocation }: WaiterAllocationProps) {
-  const sections: Array<{ key: keyof WaiterAllocation; waiters: typeof allocation.MDA }> = [
+  const sections: Array<{ key: keyof WaiterAllocation; waiters: typeof allocation.mda }> = [
     { key: 'mda', waiters: allocation.mda },
     { key: 'outside', waiters: allocation.outside },
     { key: 'library', waiters: allocation.library },

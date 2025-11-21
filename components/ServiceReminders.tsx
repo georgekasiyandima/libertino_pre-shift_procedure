@@ -1,4 +1,4 @@
-import { ServiceReminder } from '@/types'
+import type { ServiceReminder } from '@/types'
 
 interface ServiceRemindersProps {
   reminders: ServiceReminder[]

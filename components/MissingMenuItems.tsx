@@ -1,4 +1,4 @@
-import { MissingMenuItem } from '@/types'
+import type { MissingMenuItem } from '@/types'
 
 interface MissingMenuItemsProps {
   items: MissingMenuItem[]

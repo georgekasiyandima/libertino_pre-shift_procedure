@@ -1,6 +1,6 @@
 'use client'
 
-import { PreRushChecklist } from '@/types'
+import type { PreRushChecklist } from '@/types'
 import { useState } from 'react'
 
 interface PreRushChecklistProps {

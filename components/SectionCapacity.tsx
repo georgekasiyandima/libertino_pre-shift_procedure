@@ -1,4 +1,4 @@
-import { SectionCapacity } from '@/types'
+import type { SectionCapacity } from '@/types'
 
 interface SectionCapacityProps {
   capacities: SectionCapacity[]

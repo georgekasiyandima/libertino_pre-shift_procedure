@@ -9,6 +9,13 @@ import { BriefingData, Table, Reservation } from '@/types'
 
 export async function GET() {
   try {
+    // Import shared state functions
+    const { getSOSMessages, getFloorMessages, getCurrentMenu } = await import('@/lib/sharedState')
+    
+    // Get messages and menu from shared state
+    const sosMessagesData = getSOSMessages()
+    const floorMessagesData = getFloorMessages()
+    const currentMenu = getCurrentMenu()
     // Generate all tables for the floor plan
     const generateTables = (): Table[] => {
       const tables: Table[] = []
@@ -218,8 +225,8 @@ export async function GET() {
       serviceReminders: [
         {
           id: '1',
-          title: 'New Spring Menu Items',
-          description: 'All staff must review new spring menu items before service starts',
+          title: 'New Brunch Menu',
+          description: 'All staff must review new brunch menu items before service starts',
           priority: 'high',
         },
         {
@@ -461,6 +468,52 @@ export async function GET() {
           'Dessert presentation taking longer than expected',
         ],
       },
+      // Generate seating arrangement from reservations
+      seatingArrangement: reservations.map((reservation) => ({
+        tableNumber: reservation.tableNumber,
+        section: reservation.section,
+        reservation,
+        partySize: reservation.partySize,
+        status: 'reserved' as const,
+      })),
+      // SOS messages from admin API
+      sosMessages: sosMessagesData,
+      // Floor messages from admin API
+      floorMessages: floorMessagesData,
+      // Current menu (from shared state)
+      currentMenu: currentMenu || undefined,
+      // Sample item locations
+      itemLocations: [
+        {
+          id: '1',
+          item: 'Napkins',
+          location: 'Storage room, shelf 3, top drawer',
+          section: 'Storage',
+          quantity: '2 boxes',
+          notes: 'White napkins only',
+        },
+        {
+          id: '2',
+          item: 'Candles',
+          location: 'Kitchen, prep station, left cabinet',
+          section: 'Kitchen',
+          quantity: '50 units',
+        },
+        {
+          id: '3',
+          item: 'Cutlery',
+          location: 'MDA waiter station 2, bottom drawer',
+          section: 'MDA',
+          quantity: 'Full set',
+        },
+        {
+          id: '4',
+          item: 'Tablecloths',
+          location: 'Storage room, shelf 1',
+          section: 'Storage',
+          quantity: '20 pieces',
+        },
+      ],
     }
 
     return NextResponse.json(briefingData)

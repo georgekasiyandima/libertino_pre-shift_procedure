@@ -1,4 +1,4 @@
-import { ServiceTimingGuideline } from '@/types'
+import type { ServiceTimingGuideline } from '@/types'
 
 interface ServiceTimingGuidelinesProps {
   guidelines: ServiceTimingGuideline[]

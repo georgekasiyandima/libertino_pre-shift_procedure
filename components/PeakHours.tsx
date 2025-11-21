@@ -1,4 +1,4 @@
-import { PeakHour } from '@/types'
+import type { PeakHour } from '@/types'
 
 interface PeakHoursProps {
   peakHours: PeakHour[]

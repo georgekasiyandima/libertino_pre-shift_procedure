@@ -69,7 +69,10 @@ export async function fetchDinePlanReservations(
       guestName: dpReservation.guestName,
       partySize: dpReservation.partySize,
       time: formatReservationTime(dpReservation.reservationTime),
-      table: dpReservation.tableNumber,
+      tableNumber: typeof dpReservation.tableNumber === 'number' 
+        ? dpReservation.tableNumber 
+        : parseInt(String(dpReservation.tableNumber || '0'), 10) || 0,
+      section: 'MDA' as const, // Default to MDA, adjust based on DinePlan data
       notes: dpReservation.notes,
       specialRequests: dpReservation.specialRequests,
     }))
